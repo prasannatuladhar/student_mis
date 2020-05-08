@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class StudentInfo(models.Model):
@@ -9,8 +10,8 @@ class StudentInfo(models.Model):
         ('Male','Male'),
         ('Female','Female')
     ))
-    image = models.ImageField(upload_to='',null=True)
-    year_joined = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='images/',null=True)
+    year_joined = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name

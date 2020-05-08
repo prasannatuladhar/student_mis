@@ -1,0 +1,17 @@
+{% load static %}
+<div class="card mb-3" style="width: 18rem;">
+  
+     <img src=" {% if i.image %}
+     {{ i.image.url }}
+     {% else %}
+     {% static '2.jpg' %}
+     {% endif %}
+     " class="card-img-top" alt="...">
+  <div class="card-body text-center">
+    <h5 class="card-title font-weight-light">Name:{{ i.name }}</h5>
+    <h5 class="card-title font-weight-light">ID:{{ i.student_id }}</h5>
+    <h5 class="card-title font-weight-light">Phone:{{ i.phone }}</h5>
+    <h5 class="card-title font-weight-light">Gender:{{ i.gender }}</h5>
+    <h5 class="card-title font-weight-light">Enroll Year:{{ i.year_joined.year}}</h5>
+  </div>
+</div>

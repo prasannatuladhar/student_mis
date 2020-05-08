@@ -1,0 +1,13 @@
+{% extends "information/base.html" %}
+{% load static %}
+{% block title %}
+Search Page
+{% endblock title %}
+
+
+{% block content %}
+<h2>Search Result for {{ search_term}}</h2>
+
+{% include "partials/_card.html" %}
+
+{% endblock content %}
