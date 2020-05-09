@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import StudentInfo
 from django.views.generic import ListView,DetailView
+from django.views.generic.edit import CreateView
 from django.db.models import Q
 
 
@@ -13,6 +14,13 @@ class StudentDetailView(DetailView):
     template_name =  'information/detail.html'   
     model = StudentInfo
     context_object_name = 'student_info'
+
+class StudentInfoCreateView(CreateView):
+    template_name = 'information/create.html'  
+    model = StudentInfo
+    fields = ['name','student_id','phone','gender','image','year_joined']
+    success_url = '/'
+    
 
 def search(request):
     if request.method == "GET":

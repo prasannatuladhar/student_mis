@@ -6,31 +6,34 @@ Information of {{student_info.name}}
 
 
 {% block content %}
-<h2>Information</h2>
-<div class="row">
-    <div class="col-md-6 offset-md-3">
+<h2 class="text-center">Information</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
     
-    <div class="card mb-3" style="width: 18rem;">
-  
-     <img src=" {% if student_info.image %}
-     {{ student_info.image.url }}
-     {% else %}
-     {% static '2.jpg' %}
-     {% endif %}
-     " class="card-img-top" alt="...">
-  <div class="card-body text-center">
-    <h5 class="card-title font-weight-light">Name:{{student_info.name}}</h5>
-    <h5 class="card-title font-weight-light">ID:{{ student_info.student_id }}</h5>
-    <h5 class="card-title font-weight-light">Phone:{{student_info.phone}}</h5>
-    <h5 class="card-title font-weight-light">Gender:{{ student_info.gender }}</h5>
-    <h5 class="card-title font-weight-light">Enroll Year:{{ student_info.year_joined.year}}</h5>
+            <div class="card ml-3" style="width: 18rem">
+            <img src=" {% if student_info.image %}
+            {{ student_info.image.url }}
+            {% else %}
+            {% static '2.jpg' %}
+            {% endif %}
+            " class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title font-weight-light">Name:{{student_info.name}}</h5>
+            <h5 class="card-title font-weight-light">ID:{{ student_info.student_id }}</h5>
+            <h5 class="card-title font-weight-light">Phone:{{student_info.phone}}</h5>
+            <h5 class="card-title font-weight-light">Gender:{{ student_info.gender }}</h5>
+            <h5 class="card-title font-weight-light">Enroll Year:{{ student_info.year_joined.year}}</h5>
+          </div>
+        </div>
+     
+     
+    
+      </div>
   </div>
 </div>
-     
-     
-    
-    </div>
-  </div>
+
+
 
    
 

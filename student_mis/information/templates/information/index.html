@@ -6,14 +6,25 @@ Home Page
 
 
 {% block content %}
-<h2>List of Student</h2>
-
-{% if info %}
-    {% for i in info  %}
+ <div class="container">
+ <h2 class="text-center">List of Student</h2>
+  <div class="row">
+   {% if info %}
+     {% for i in info  %}
+    <div class="col-md-4">
+ 
       {% include "information/partials/_card.html" %}
+      
+    </div>
     {% endfor %}
-{% else %}
-<p>Currently, there are no student in database</p>
-{% endif %}
+       {% else %}
+   <p>Currently, there are no student in database</p>
+ {% endif %}
+
+   </div>
+</div>
+
+
+
 
 {% endblock content %}
