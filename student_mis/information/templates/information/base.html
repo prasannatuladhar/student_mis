@@ -24,6 +24,15 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mx-auto">
      <a href="{% url 'create' %}"> <li><img src="{% static 'plus.svg' %}">&nbsp;Create</li></a>
+     {% if user.is_authenticated %}
+     <a href="{% url 'logout' %}"> <li>&nbsp;&nbsp;&nbsp; Logout</li></a>
+     {% else %}
+     <a href="{% url 'login' %}"> <li>&nbsp;&nbsp;&nbsp; Login</li></a> 
+     <a href="{% url 'register' %}"> <li>&nbsp;&nbsp;&nbsp; Sign Up</li></a> 
+
+     {% endif %}
+     
+
     </ul>
     <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search' %}">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_name">
@@ -32,9 +41,21 @@
   </div>
 </nav>
 
-
- {% block content %}
- {% endblock content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+ 
+ <div class="container">
+  <div class="row">
+    {% block content %}
+    {% endblock content %}
+  </div>
+</div>
+ 
       
 
 
