@@ -6,25 +6,26 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class StudentPageView(ListView):
+class StudentPageView(LoginRequiredMixin,ListView):
     template_name = 'information/index.html'
     model = StudentInfo
     context_object_name = 'info'
 
-class StudentDetailView(DetailView):
+class StudentDetailView(LoginRequiredMixin,DetailView):
     template_name =  'information/detail.html'   
     model = StudentInfo
     context_object_name = 'student_info'
 
-class StudentInfoCreateView(CreateView):
+class StudentInfoCreateView(LoginRequiredMixin,CreateView):
     template_name = 'information/create.html'  
     model = StudentInfo
     fields = ['name','student_id','phone','gender','image','year_joined']
     success_url = '/'
 
-class StudentInfoUpdateView(UpdateView):
+class StudentInfoUpdateView(LoginRequiredMixin,UpdateView):
     template_name  = 'information/update.html' 
     model = StudentInfo
     fields = ['name','student_id','phone','gender','image','year_joined']
@@ -32,7 +33,7 @@ class StudentInfoUpdateView(UpdateView):
         instance = form.save()
         return redirect('detail',instance.pk)
 
-class StudentInfoDeleteView(DeleteView):
+class StudentInfoDeleteView(LoginRequiredMixin,DeleteView):
     template_name  = 'information/delete.html' 
     model = StudentInfo
     success_url = '/'
