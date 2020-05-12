@@ -6,7 +6,8 @@ Search Page
 
 
 {% block content %}
-<h2>Search Result for {{ search_term}}</h2>
+<h2 class="text-center">Search Result for {{ search_term}}</h2>
+<br>
 {% for i in student_info  %}
   {% include "information/partials/_card.html" %}
 {% endfor %}

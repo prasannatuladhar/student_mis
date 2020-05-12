@@ -7,23 +7,31 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 class StudentPageView(LoginRequiredMixin,ListView):
+    login_url = '/login/'
     template_name = 'information/index.html'
     model = StudentInfo
     context_object_name = 'info'
 
 class StudentDetailView(LoginRequiredMixin,DetailView):
+    login_url = '/login/'
     template_name =  'information/detail.html'   
     model = StudentInfo
     context_object_name = 'student_info'
 
 class StudentInfoCreateView(LoginRequiredMixin,CreateView):
+    login_url = '/login/'
     template_name = 'information/create.html'  
     model = StudentInfo
     fields = ['name','student_id','phone','gender','image','year_joined']
-    success_url = '/'
+    def form_valid(self,form):
+        instance = form.save(commit=False)
+        instance.manager = self.request.user
+        instance.save()
+        return redirect('index')
 
 class StudentInfoUpdateView(LoginRequiredMixin,UpdateView):
     template_name  = 'information/update.html' 
@@ -72,7 +80,10 @@ def register_user(request):
         form = UserCreationForm()         
     return render(request, 'information/registration/register.html', {'form': form})
 
+
+@login_required(login_url='/login/')
 def search(request):
+    
     if request.method == "GET":
         search_term = request.GET['search_name']
         
