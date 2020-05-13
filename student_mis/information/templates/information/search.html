@@ -8,9 +8,18 @@ Search Page
 {% block content %}
 <h2 class="text-center">Search Result for {{ search_term}}</h2>
 <br>
-{% for i in student_info  %}
-  {% include "information/partials/_card.html" %}
-{% endfor %}
+
+    {% for i in student_info  %}
+         {% if i.manager == request.user %}
+    {% include "information/partials/_card.html" %}
+         {% else %}
+         <p>Sorry, You dont have permission to view this</p>
+         {% endif %}
+    {% endfor %}
+
+
+
+
 
 
 {% endblock content %}

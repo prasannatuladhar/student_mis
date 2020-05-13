@@ -16,6 +16,11 @@ class StudentPageView(LoginRequiredMixin,ListView):
     model = StudentInfo
     context_object_name = 'info'
 
+    # #filter with specific user . to display individual objects
+    def get_queryset(self):
+        info = super().get_queryset()
+        return info.filter(manager=self.request.user)
+
 class StudentDetailView(LoginRequiredMixin,DetailView):
     login_url = '/login/'
     template_name =  'information/detail.html'   
@@ -27,6 +32,7 @@ class StudentInfoCreateView(LoginRequiredMixin,CreateView):
     template_name = 'information/create.html'  
     model = StudentInfo
     fields = ['name','student_id','phone','gender','image','year_joined']
+    
     def form_valid(self,form):
         instance = form.save(commit=False)
         instance.manager = self.request.user

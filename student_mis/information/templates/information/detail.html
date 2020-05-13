@@ -8,7 +8,8 @@ Information of {{student_info.name}}
 
 {% block content %}
 <h2 class="text-center">Information</h2>
-<div class="container">
+{% if student_info.manager == request.user %}
+       <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
     
@@ -27,12 +28,13 @@ Information of {{student_info.name}}
             <h5 class="card-title font-weight-light">Enroll Year:{{ student_info.year_joined.year}}</h5>
           </div>
         </div>
-     
-     
-    
       </div>
   </div>
 </div>
+{% else %}
+<p>You are not allowed to see this information</p>
+{% endif %}
+
 
 
 
